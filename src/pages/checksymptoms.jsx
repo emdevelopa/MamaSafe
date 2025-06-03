@@ -1,0 +1,117 @@
+import { CiWarning } from "react-icons/ci";
+import { FaBell, FaFacebook, FaInstagram, FaTwitter, FaUser } from "react-icons/fa";
+
+export default function CheckSymptoms() {
+  return (
+    <>
+      <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
+        <h1 className="font-bold text-2xl">MamaSafe</h1>
+        <ul className="flex items-center gap-8 ">
+          <li>
+            <a href="/dashboard">Dashboard</a>
+          </li>
+          <li>
+            <a href="/about">Profile</a>
+          </li>
+          <li>
+            <a href="/services">Settings</a>
+          </li>
+          <li>
+            <FaBell className="text-2xl" />
+          </li>
+          <li>
+            <FaUser className="text-2xl" />
+          </li>
+        </ul>
+      </nav>
+
+      <div className="flex items-center justify-center ">
+        <div className="w-[60%] flex flex-col gap-[3em]">
+          <div className="flex items-center justify-between px-8 py-4 ">
+            <div>
+              {" "}
+              <h1 className="text-4xl font-bold my-8">Check Symptoms</h1>
+              <p>
+                Select symptoms you're experiencing. We'll guide you on next
+                step
+              </p>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1650700680288-e6ea1264883e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Lll"
+              className="w-[12em] h-[12em] object-cover rounded-full mt-4"
+            />
+          </div>
+          <div className="border flex gap-8 flex-col border-gray-300 rounded-lg p-4">
+            <div className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
+              />
+              <p className="text-sm">Severe headache</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
+              />
+              <p className="text-sm">Blurred Vision</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
+              />
+              <p className="text-sm">Vaginal bleeding</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
+              />
+              <p className="text-sm">Swollen feet</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
+              />
+              <p className="text-sm">High fever</p>
+            </div>
+            <div className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
+              />
+              <p className="text-sm">Baby not moving</p>
+            </div>
+          </div>
+          <button className="bg-[#4cb072de] text-white p-3 rounded-lg hover:bg-[#3a9b5c] transition duration-300">
+            Check Symptoms Now
+          </button>
+          <div className="border flex gap-8 flex-col border-gray-300 rounded-lg p-4">
+            <div className="flex gap-2 items-center">
+              <CiWarning className="text-red-400 text-3xl" />
+              <div>
+                <p className="font-bold">Urgent: Visit a clinic immediately</p>
+                <p>please seek medical attention right away</p>
+              </div>
+            </div>
+            <button className="bg-red-400 text-white p-3 rounded-lg hover:bg-red-500 transition duration-300">
+              Get Help Now
+            </button>
+          </div>
+        </div>
+      </div>
+      <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200">
+        <p>Powered by MamaSafe</p>
+        <div className="flex gap-4 text-2xl">
+          <FaFacebook />
+          <FaTwitter />
+          <FaInstagram />
+        </div>
+        <p>&copy; 2024 MamaSafe. All rights reserved.</p>
+      </footer>
+    </>
+  );
+}
