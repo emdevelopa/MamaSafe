@@ -15,11 +15,13 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { FaChartBar, FaVolumeHigh } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-    const [progress, setProgress] = useState(30); // Example progress percentage
+  const location = useLocation();
+  const user = location.state || {};
+  const [progress, setProgress] = useState(30); // Example progress percentage
   return (
     <div className=" ">
       <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
@@ -45,7 +47,9 @@ export default function Dashboard() {
 
       <div className="px-8">
         <div>
-          <h1 className="text-4xl font-bold mt-8">Welcome back, Sarah</h1>
+          <h1 className="text-4xl font-bold mt-8">
+            Welcome back, {user.fullName ? user.fullName : "User"}
+          </h1>
           <p className="text-gray-500 mt-4">Let's check on your health today</p>
         </div>
 
@@ -208,15 +212,15 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-       <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
-              <p>Powered by MamaSafe</p>
-              <div className="flex gap-4 text-2xl">
-                <FaFacebook />
-                <FaTwitter />
-                <FaInstagram />
-              </div>
-              <p>&copy; 2024 MamaSafe. All rights reserved.</p>
-            </footer>
+      <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
+        <p>Powered by MamaSafe</p>
+        <div className="flex gap-4 text-2xl">
+          <FaFacebook />
+          <FaTwitter />
+          <FaInstagram />
+        </div>
+        <p>&copy; 2024 MamaSafe. All rights reserved.</p>
+      </footer>
     </div>
   );
 }

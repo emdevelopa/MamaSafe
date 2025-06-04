@@ -1,8 +1,53 @@
 import { FaEye, FaLock, FaPhone, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      // Login with Firebase Auth
+      // const userCredential = await signInWithEmailAndPassword(
+      //   auth,
+      //   form.email,
+      //   form.password
+      // );
+      // const user = userCredential.user;
+      // Fetch user data from Firestore
+      const q = query(
+        collection(db, "users"),
+        where("email", "==", form.email)
+      );
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+        navigate("/dashboard", { state: userData });
+      } else {
+        setError("User data not found.");
+      }
+    } catch (err) {
+      setError("Invalid email or password.");
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="bg-gradient h-screen flex justify-between w-full">
       <div className="w-[50%] flex items-center justify-center">
@@ -22,35 +67,45 @@ export default function Login() {
         <div className="flex flex-col justify-center  items-center gap-4 bg-white p-8 rounded-[1em] w-[60%]">
           <p className="font-bold">Welcome Back</p>
           <p className="text-gray-400">Login to your account</p>
-          <form action="" className="flex flex-col gap-6 w-full">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full">
             <div className="flex flex-col gap-3">
-              <label htmlFor="">Phone Number</label>
+              <label htmlFor="">Email</label>
               <div className="flex gap-3 border border-gray-300 rounded-lg p-2 items-center">
-                <FaPhone />
+                <FaUser />
                 <input
                   className="border-none outline-none"
-                  type="text"
-                  placeholder="Enter your full name"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
                 />
               </div>
             </div>
             <div className="flex flex-col gap-3">
-              <label htmlFor="">Phone Number</label>
+              <label htmlFor="">Password</label>
               <div className="flex justify-between gap-3 border border-gray-300 rounded-lg p-2 items-center">
                 <FaLock />
                 <input
                   className="border-none  w-full outline-none"
-                  type="text"
-                  placeholder="+234"
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
                 />
                 <FaEye />
               </div>
             </div>
+            {error && <div className="text-red-500 text-center">{error}</div>}
             <button
               className="bg-[#4cb072de] text-white p-3 rounded-lg hover:bg-[#3a9b5c] transition duration-300"
-              onClick={() => navigate("/dashboard")}
+              type="submit"
+              disabled={loading}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
             <div className="flex flex-col items-center justify-center gap-4  ">
               <p className="text-center"> Secure Login</p>
