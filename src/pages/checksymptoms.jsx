@@ -103,7 +103,7 @@ export default function CheckSymptoms() {
           </div>
         </div>
       </div>
-      <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200">
+      <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
         <p>Powered by MamaSafe</p>
         <div className="flex gap-4 text-2xl">
           <FaFacebook />

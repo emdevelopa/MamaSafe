@@ -4,14 +4,17 @@ import {
   FaBell,
   FaCalendar,
   FaClock,
+  FaFacebook,
   FaGreaterThan,
   FaHeart,
   FaHome,
+  FaInstagram,
   FaLock,
   FaMapMarked,
   FaMapMarker,
   FaMapMarkerAlt,
   FaMapPin,
+  FaTwitter,
   FaUser,
 } from "react-icons/fa";
 import { FaMapLocation } from "react-icons/fa6";
@@ -145,8 +148,17 @@ export default function Appointments() {
           </div>
         </div>
       </div>
-      {/* Footer */}
-      <footer className="bg-gray-100 text-sm text-gray-600 py-8 px-6">
+          {/* Footer */}
+           <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
+                  <p>Powered by MamaSafe</p>
+                  <div className="flex gap-4 text-2xl">
+                    <FaFacebook />
+                    <FaTwitter />
+                    <FaInstagram />
+                  </div>
+                  <p>&copy; 2024 MamaSafe. All rights reserved.</p>
+                </footer>
+      {/* <footer className="bg-gray-100 text-sm text-gray-600 py-8 px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div>
             <h4 className="font-semibold text-gray-800 mb-2">About MamaSafe</h4>
@@ -182,7 +194,7 @@ export default function Appointments() {
         <div className="text-center mt-6 text-xs text-gray-500 border-t border-gray-300 pt-5">
           © 2024 MamaSafe. All rights reserved.
         </div>
-      </footer>
+      </footer> */}
     </>
   );
 }

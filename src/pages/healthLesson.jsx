@@ -1,10 +1,32 @@
 import { useState } from "react";
-import { FaClock, FaSearch } from "react-icons/fa";
+import { FaBell, FaClock, FaFacebook, FaInstagram, FaSearch, FaTwitter, FaUser } from "react-icons/fa";
 import { FaVolumeHigh } from "react-icons/fa6";
 
 export default function HealthLessons() {
-        const [progress, setProgress] = useState(30); 
-    return (
+  const [progress, setProgress] = useState(30);
+  return (
+    <>
+      {" "}
+      <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
+        <h1 className="font-bold text-2xl">MamaSafe</h1>
+        <ul className="flex items-center gap-8 ">
+          <li>
+            <a href="/dashboard">Dashboard</a>
+          </li>
+          <li>
+            <a href="/about">Profile</a>
+          </li>
+          <li>
+            <a href="/services">Settings</a>
+          </li>
+          <li>
+            <FaBell className="text-2xl" />
+          </li>
+          <li>
+            <FaUser className="text-2xl" />
+          </li>
+        </ul>
+      </nav>
       <div className="flex flex-col items-center justify-center mt-10">
         <h1 className="text-2xl">Health Education</h1>
         <div className="flex items-center gap-4 mt-4 bg-[#e2e2e272] rounded-md px-4 py-3 w-[30%]">
@@ -153,5 +175,15 @@ export default function HealthLessons() {
           Load More
         </button>
       </div>
-    );
-} 
+      <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
+        <p>Powered by MamaSafe</p>
+        <div className="flex gap-4 text-2xl">
+          <FaFacebook />
+          <FaTwitter />
+          <FaInstagram />
+        </div>
+        <p>&copy; 2024 MamaSafe. All rights reserved.</p>
+      </footer>
+    </>
+  );
+}

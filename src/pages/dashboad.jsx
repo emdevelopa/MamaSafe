@@ -4,11 +4,14 @@ import {
   FaBlog,
   FaCalendar,
   FaClock,
+  FaFacebook,
   FaGreaterThan,
+  FaInstagram,
   FaLock,
   FaPhone,
   FaSearch,
   FaSpeakerDeck,
+  FaTwitter,
   FaUser,
 } from "react-icons/fa";
 import { FaChartBar, FaVolumeHigh } from "react-icons/fa6";
@@ -205,6 +208,15 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+       <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
+              <p>Powered by MamaSafe</p>
+              <div className="flex gap-4 text-2xl">
+                <FaFacebook />
+                <FaTwitter />
+                <FaInstagram />
+              </div>
+              <p>&copy; 2024 MamaSafe. All rights reserved.</p>
+            </footer>
     </div>
   );
 }
