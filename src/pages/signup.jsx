@@ -23,6 +23,7 @@ export default function SignUp() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,6 +36,7 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
     if (form.password !== form.confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -45,9 +47,7 @@ export default function SignUp() {
     }
     setLoading(true);
     try {
-      // Generate a uuid for the user
       const uid = uuidv4();
-      // Optionally, you can skip Firebase Auth if you only want Firestore storage
       await addDoc(collection(db, "users"), {
         uid,
         email: form.email,
@@ -60,7 +60,10 @@ export default function SignUp() {
         language: form.language,
         createdAt: new Date(),
       });
-      navigate("/login");
+      setSuccess("Account created successfully! Redirecting to login...");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (err) {
       setError(err.message);
     }
@@ -237,6 +240,7 @@ export default function SignUp() {
             </div>
           </div>
           {error && <div className="text-red-500 text-center">{error}</div>}
+          {success && <div className="text-green-600 text-center">{success}</div>}
           <button
             className="bg-[#4cb072de] text-white p-3 rounded-lg hover:bg-[#3a9b5c] transition duration-300"
             type="submit"
