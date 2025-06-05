@@ -1,14 +1,51 @@
 import { CiWarning } from "react-icons/ci";
 import { FaBell, FaFacebook, FaInstagram, FaTwitter, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function CheckSymptoms() {
-  return (
-    <>
+    const navigate = useNavigate();
+    const [selected, setSelected] = useState([]);
+    const [checked, setChecked] = useState(false);
+
+    const symptoms = [
+      "Severe headache",
+      "Blurred Vision",
+      "Vaginal bleeding",
+      "Swollen feet",
+      "High fever",
+      "Baby not moving"
+    ];
+
+    // Define which symptoms are severe
+    const severeSymptoms = [
+      "Severe headache",
+      "Vaginal bleeding",
+      "High fever",
+      "Baby not moving"
+    ];
+
+    const handleCheckbox = (symptom) => {
+      setSelected((prev) =>
+        prev.includes(symptom)
+          ? prev.filter((s) => s !== symptom)
+          : [...prev, symptom]
+      );
+    };
+
+    const handleCheck = () => {
+      setChecked(true);
+    };
+
+    const hasSevere = selected.some((s) => severeSymptoms.includes(s));
+
+    return (
+      <>
       <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
         <h1 className="font-bold text-2xl">MamaSafe</h1>
         <ul className="flex items-center gap-8 ">
           <li>
-            <a href="/dashboard">Dashboard</a>
+            <a onClick={() => navigate(-1)}>Dashboard</a>
           </li>
           <li>
             <a href="/about">Profile</a>
@@ -43,64 +80,46 @@ export default function CheckSymptoms() {
             />
           </div>
           <div className="border flex gap-8 flex-col border-gray-300 rounded-lg p-4">
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
-              />
-              <p className="text-sm">Severe headache</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
-              />
-              <p className="text-sm">Blurred Vision</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
-              />
-              <p className="text-sm">Vaginal bleeding</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
-              />
-              <p className="text-sm">Swollen feet</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
-              />
-              <p className="text-sm">High fever</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
-              />
-              <p className="text-sm">Baby not moving</p>
-            </div>
+            {symptoms.map((symptom) => (
+                <div className="flex gap-2 items-center" key={symptom}>
+                  <input
+                    type="checkbox"
+                    className="w-6 h-6 border-2 border-green-500 rounded-md appearance-none checked:bg-green-500 checked:border-green-500"
+                    checked={selected.includes(symptom)}
+                    onChange={() => handleCheckbox(symptom)}
+                  />
+                  <p className="text-sm">{symptom}</p>
+                </div>
+              ))}
           </div>
-          <button className="bg-[#4cb072de] text-white p-3 rounded-lg hover:bg-[#3a9b5c] transition duration-300">
-            Check Symptoms Now
-          </button>
-          <div className="border flex gap-8 flex-col border-gray-300 rounded-lg p-4">
-            <div className="flex gap-2 items-center">
-              <CiWarning className="text-red-400 text-3xl" />
-              <div>
-                <p className="font-bold">Urgent: Visit a clinic immediately</p>
-                <p>please seek medical attention right away</p>
-              </div>
-            </div>
-            <button className="bg-red-400 text-white p-3 rounded-lg hover:bg-red-500 transition duration-300">
-              Get Help Now
+          <button
+              className="bg-[#4cb072de] text-white p-3 rounded-lg hover:bg-[#3a9b5c] transition duration-300"
+              onClick={handleCheck}
+            >
+              Check Symptoms Now
             </button>
-          </div>
+            {checked && hasSevere && (
+              <div className="border flex gap-8 flex-col border-gray-300 rounded-lg p-4">
+                <div className="flex gap-2 items-center">
+                  <CiWarning className="text-red-400 text-3xl" />
+                  <div>
+                    <p className="font-bold">Urgent: Visit a clinic immediately</p>
+                    <p>please seek medical attention right away</p>
+                  </div>
+                </div>
+                <button className="bg-red-400 text-white p-3 rounded-lg hover:bg-red-500 transition duration-300">
+                  Get Help Now
+                </button>
+              </div>
+            )}
+            {checked && !hasSevere && (
+              <div className="border flex gap-8 flex-col border-green-400 rounded-lg p-4">
+                <div className="flex gap-2 items-center">
+                  <p className="font-bold text-green-600">No urgent symptoms detected.</p>
+                  <p className="text-green-600">Continue to monitor your health and contact your healthcare provider if you feel unwell.</p>
+                </div>
+              </div>
+            )}
         </div>
       </div>
       <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">

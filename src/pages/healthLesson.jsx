@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { FaBell, FaClock, FaFacebook, FaInstagram, FaSearch, FaTwitter, FaUser } from "react-icons/fa";
 import { FaVolumeHigh } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 export default function HealthLessons() {
   const [progress, setProgress] = useState(30);
+  const navigate = useNavigate();
   return (
     <>
       {" "}
@@ -11,7 +13,7 @@ export default function HealthLessons() {
         <h1 className="font-bold text-2xl">MamaSafe</h1>
         <ul className="flex items-center gap-8 ">
           <li>
-            <a href="/dashboard">Dashboard</a>
+            <a onClick={() => navigate(-1)}>Dashboard</a>
           </li>
           <li>
             <a href="/about">Profile</a>
