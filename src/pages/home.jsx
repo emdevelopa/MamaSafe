@@ -17,7 +17,7 @@ export default function Home() {
 
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
-    <div className="px-[3em]">
+    <div className="px-[1em] sm:px-[2em] md:px-[3em]">
       <nav className="flex items-center justify-between p-4 border-b border-gray-200 relative">
         {/* Logo */}
         <div className="flex items-center gap-2">
@@ -78,7 +78,7 @@ export default function Home() {
           </ul>
         )}
       </nav>
-      <div className="flex  items-center justify-between h-[80vh]">
+      <div className="flex items-center justify-between md:h-[80vh] flex-col gap-[2em] py-8  md:flex-row">
         <div className="flex flex-col gap-4">
           <h1 className="font-bold text-4xl">Welcome to MamaSafe</h1>
           <p className="text-gray-400">
@@ -94,7 +94,7 @@ export default function Home() {
           </div>
         </div>
         <img
-          className="w-[50%] rounded-xl object-cover"
+          className="md:w-[50%] w-[100%] rounded-xl object-cover"
           src="https://balaoverseas.com/wp-content/uploads/2022/11/bg22.jpg"
           alt="dddd"
         />
