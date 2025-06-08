@@ -173,7 +173,7 @@ export default function Appointments() {
           <h1>Next Appointment</h1>
           <div className="flex flex-col rounded-md p-4 gap-3 bg-[#d3fae290] mt-4">
             <div className="flex items-center gap-2 justify-between">
-              <h1 className="font-bold text-[24px]">Parental Checkup</h1>
+              <h1 className="font-bold text-[18px] md:text-[24px]">Parental Checkup</h1>
               <p className="text-[#4cb072f4] font-semibold">scheduled</p>
             </div>
             <div className="flex items-center gap-2 text-gray-500">
@@ -189,9 +189,9 @@ export default function Appointments() {
         </div>
 
         <div className="px-6 py-8">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold">My Reminders</h2>
-            <button className="flex items-center gap-2 bg-[#4cb072de] cursor-pointer hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm">
+          <div className="flex gap-2 justify-between items-center mb-6">
+            <h2 className="md:text-xl font-semibold">My Reminders</h2>
+            <button className="flex items-center gap-2 bg-[#4cb072de] cursor-pointer hover:bg-green-600 text-white px-2 md:px-4 py-2 rounded-md text-sm">
               <Plus size={16} /> Add New Reminder
             </button>
           </div>
