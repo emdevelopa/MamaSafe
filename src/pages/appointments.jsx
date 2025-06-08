@@ -69,7 +69,7 @@ export default function Appointments() {
         <ul className="hidden md:flex space-x-6 font-medium">
           <li>
             <a
-              href="/dashboard"
+            
               onClick={() => {
                 toggleMenu;
                 navigate(-1);

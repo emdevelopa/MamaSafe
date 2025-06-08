@@ -93,7 +93,7 @@ export default function CheckSymptoms() {
             <ul className="absolute top-full left-0 w-full bg-white flex flex-col items-start p-4 gap-3 border-t shadow-md z-10 md:hidden">
               <li>
                 <a
-                  href="/dashboard"
+      
                   onClick={() => {
                     toggleMenu;
                     navigate(-1);

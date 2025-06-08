@@ -69,7 +69,7 @@ export default function HealthLessons() {
           <ul className="absolute top-full left-0 w-full bg-white flex flex-col items-start p-4 gap-3 border-t shadow-md z-10 md:hidden">
             <li>
               <a
-                href="/dashboard"
+                
                 onClick={() => {
                   toggleMenu;
                   navigate(-1);
@@ -119,7 +119,7 @@ export default function HealthLessons() {
       </nav> */}
       <div className="flex flex-col items-center justify-center mt-10">
         <h1 className="text-2xl">Health Education</h1>
-        <div className="flex items-center gap-4 mt-4 bg-[#e2e2e272] rounded-md px-4 py-3 w-[30%]">
+        <div className="flex items-center gap-4 mt-4 bg-[#e2e2e272] rounded-md px-4 py-3 md:w-[30%]">
           <input
             type="text"
             className="bg-transparent w-full border-none outline-none"
@@ -127,7 +127,7 @@ export default function HealthLessons() {
           />
           <FaSearch className="text-[#4cb07292]" />
         </div>
-        <div className="my-10  bg-[#86dea846] px-12 w-full py-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+        <div className="my-10  bg-[#86dea846] px-6 md:px-12 w-full py-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
           <div className="p-6 bg-white shadow-md rounded-md w-full max-w-md ">
             <p className="text-[#4cb072de] text-sm ">NUTRITION</p>
             <p className="text-lg mt-4">Essential Nutrients During Pregnancy</p>
@@ -261,9 +261,9 @@ export default function HealthLessons() {
             </div>
           </div>{" "}
         </div>
-        <button className="  px-6 py-3 bg-[#4cb072de] text-white rounded-md">
+        {/* <button className="  px-6 py-3 bg-[#4cb072de] text-white rounded-md">
           Load More
-        </button>
+        </button> */}
       </div>
       <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
         <p>Powered by MamaSafe</p>
