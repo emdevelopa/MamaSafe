@@ -157,7 +157,7 @@ export default function Appointments() {
           </li>
         </ul>
       </nav> */}
-      <div className="px-10 ">
+      <div className="px-5 md:px-10 ">
         <p className="flex items-center gap-2  mt-8">
           <FaHome />{" "}
           <span
