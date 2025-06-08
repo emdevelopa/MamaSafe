@@ -1,33 +1,82 @@
-import { FaFacebook, FaHeart, FaHeartbeat, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useState } from "react";
+import {
+  FaBars,
+  FaFacebook,
+  FaHeart,
+  FaHeartbeat,
+  FaInstagram,
+  FaTimes,
+  FaTwitter,
+} from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <div className="px-[3em]">
-      <nav className="flex items-center justify-between p-4 border-b border-gray-200">
-        <div className="flex items-center justify-center gap-2">
+      <nav className="flex items-center justify-between p-4 border-b border-gray-200 relative">
+        {/* Logo */}
+        <div className="flex items-center gap-2">
           <FaHeart className="text-[#4cb072de] text-2xl" />
           <h1 className="font-bold text-2xl">MamaSafe</h1>
         </div>
 
-        <ul className="flex space-x-4">
+        {/* Desktop Links */}
+        <ul className="hidden md:flex space-x-6 font-medium">
           <li>
-            <a>Home</a>
+            <a href="#">Home</a>
           </li>
           <li>
-            <li>
-              <a>About</a>
-            </li>
+            <a href="#">About</a>
           </li>
           <li>
-            <a>Services</a>
+            <a href="#">Services</a>
           </li>
           <li>
-            <a>Contact</a>
+            <a href="#">Contact</a>
           </li>
         </ul>
+
+        {/* Hamburger Icon (Mobile) */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            {isOpen ? (
+              <FaTimes className="text-2xl" />
+            ) : (
+              <FaBars className="text-2xl" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <ul className="absolute top-full left-0 w-full bg-white flex flex-col items-start p-4 gap-3 border-t shadow-md z-10 md:hidden">
+            <li>
+              <a href="#" onClick={toggleMenu}>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={toggleMenu}>
+                About
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={toggleMenu}>
+                Services
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={toggleMenu}>
+                Contact
+              </a>
+            </li>
+          </ul>
+        )}
       </nav>
       <div className="flex  items-center justify-between h-[80vh]">
         <div className="flex flex-col gap-4">
