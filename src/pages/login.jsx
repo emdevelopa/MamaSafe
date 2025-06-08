@@ -49,22 +49,22 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-gradient h-screen flex justify-between w-full">
-      <div className="w-[50%] flex items-center justify-center">
+    <div className="bg-gradient flex flex-col md:flex-row items-center md:justify-between w-full">
+      <div className="w-full md:w-[50%] flex items-center justify-center">
         <img
-          className="w-[20em] h-[20em] rounded-full object-cover"
+          className="md:w-[20em] md:h-[20em] w-[8em] h-[8em] rounded-full object-cover"
           src="https://df6yevl24pl4a.cloudfront.net/filer_public_thumbnails/filer_public/37/c5/37c59250-4029-4b82-8ad2-e49b3ccec3ce/220802-roh.jpg__376x190_q90_crop_subsampling-2_upscale.jpg.webp"
           alt="dddd"
         />
       </div>
 
-      <div className="flex   w-[50%]  flex-col items-center gap-8 justify-center h-full]">
+      <div className="flex  w-full md:w-[50%]  flex-col items-center gap-8 justify-center h-full">
         <div className="text-center">
           <h1 className="text-[#000] text-4xl font-bold">MamaSafe</h1>
           <p className="text-gray-400">Your Trusted Pregnancy Companion</p>
         </div>
 
-        <div className="flex flex-col justify-center  items-center gap-4 bg-white p-8 rounded-[1em] w-[60%]">
+        <div className="flex flex-col justify-center  items-center gap-4 bg-white p-8 rounded-[1em] md:w-[60%]">
           <p className="font-bold">Welcome Back</p>
           <p className="text-gray-400">Login to your account</p>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full">

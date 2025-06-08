@@ -71,8 +71,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center py-8 bg-gray-100">
-      <div className="flex flex-col justify-center w-[35%] items-center gap-4 bg-white p-8 rounded-lg  ">
+    <div className="flex items-center justify-center md:py-8 bg-gray-100">
+      <div className="flex flex-col justify-center md:w-[35%] items-center gap-4 bg-white p-8 rounded-lg  ">
         <h1 className="text-[#4cb072de] text-4xl font-bold">MamaSafe</h1>
         <p className="font-bold">Welcome to Mamasafe</p>
         <p className="text-gray-400">Create your account to get started</p>
