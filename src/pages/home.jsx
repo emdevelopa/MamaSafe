@@ -99,7 +99,7 @@ export default function Home() {
           alt="dddd"
         />
       </div>
-      <div className="bg-[#9d9d9d24] flex gap-[2em] px-[2em] py-[4em]">
+      <div className="bg-[#9d9d9d24] flex flex-col md:flex-row gap-[2em] px-[2em] py-[4em]">
         <div className="flex flex-col gap-4 justify-between p-[2em] shadow-md rounded-lg bg-white">
           <FaHeartbeat className="text-[#4cb072de] text-2xl" />
           {/* icon */}
@@ -111,34 +111,34 @@ export default function Home() {
         <div className="flex flex-col gap-4 justify-between p-[2em] shadow-md rounded-lg bg-white">
           <FaHeartbeat className="text-[#4cb072de] text-2xl" />
           {/* icon */}
-          <h1 className="text-[28px]">Health Education</h1>
+          <h1 className="text-[28px]">Appointment Tracking</h1>
           <p className="text-gray-400">
-            Access Vital maternal health information and resources
+            Never Miss important check-ups and vacinations
           </p>
         </div>{" "}
         <div className="flex flex-col gap-4 justify-between p-[2em] shadow-md rounded-lg bg-white">
           <FaHeartbeat className="text-[#4cb072de] text-2xl" />
           {/* icon */}
-          <h1 className="text-[28px]">Health Education</h1>
+          <h1 className="text-[28px]">Community Support</h1>
           <p className="text-gray-400">
-            Access Vital maternal health information and resources
+            Connect with other mothers and healthcare providers
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-4 my-[4em] px-[6em]">
-        <div className="flex flex-col items-center justify-between px-[2em] py-[4em]">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 my-[4em] px-[6em]">
+        <div className="flex flex-col items-center justify-between px-[2em] md:py-[4em] py-[2em]">
           <h1 className="font-bold text-[27px]">1000+</h1>
           <p className="text-gray-400">Users</p>
         </div>{" "}
-        <div className="flex flex-col items-center justify-between px-[2em] py-[4em]">
+        <div className="flex flex-col items-center justify-between px-[2em]  md:py-[4em] py-[2em]">
           <h1 className="font-bold text-[27px]">50+</h1>
-          <p className="text-gray-400">Healthcare Partners</p>
+          <p className="text-gray-400 text-center">Healthcare Partners</p>
         </div>{" "}
-        <div className="flex flex-col items-center justify-between px-[2em] py-[4em]">
+        <div className="flex flex-col items-center justify-between px-[2em] md:py-[4em] py-[2em]">
           <h1 className="font-bold text-[27px]">24/7</h1>
           <p className="text-gray-400">support</p>
         </div>{" "}
-        <div className="flex flex-col items-center justify-between px-[2em] py-[4em]">
+        <div className="flex flex-col items-center justify-between px-[2em] md:py-[4em] py-[2em]">
           <h1 className="font-bold text-[27px]">100%</h1>
           <p className="text-gray-400">safe</p>
         </div>{" "}
