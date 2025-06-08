@@ -1,16 +1,19 @@
 import { useState } from "react";
 import {
+  FaBars,
   FaBell,
   FaBlog,
   FaCalendar,
   FaClock,
   FaFacebook,
   FaGreaterThan,
+  FaHeart,
   FaInstagram,
   FaLock,
   FaPhone,
   FaSearch,
   FaSpeakerDeck,
+  FaTimes,
   FaTwitter,
   FaUser,
 } from "react-icons/fa";
@@ -22,11 +25,19 @@ export default function Dashboard() {
   const location = useLocation();
   const user = location.state || {};
   const [progress, setProgress] = useState(30); // Example progress percentage
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <div className=" ">
-      <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
+    
+
+      <nav className="flex items-center bg-[#a7e1bd25] justify-between p-4 border-b border-gray-200 relative">
+        {/* Logo */}
         <h1 className="font-bold text-2xl">MamaSafe</h1>
-        <ul className="flex items-center gap-8 ">
+
+        {/* Desktop Links */}
+        <ul className="hidden md:flex space-x-6 font-medium">
           <li>
             <a href="/dashboard">Dashboard</a>
           </li>
@@ -43,6 +54,44 @@ export default function Dashboard() {
             <FaUser className="text-2xl" />
           </li>
         </ul>
+
+        {/* Hamburger Icon (Mobile) */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            {isOpen ? (
+              <FaTimes className="text-2xl" />
+            ) : (
+              <FaBars className="text-2xl" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <ul className="absolute top-full left-0 w-full bg-white flex flex-col items-start p-4 gap-3 border-t shadow-md z-10 md:hidden">
+            <li>
+              <a href="/dashboard" onClick={toggleMenu}>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="/about" onClick={toggleMenu}>
+                Profile
+              </a>
+            </li>
+            <li>
+              <a href="/services" onClick={toggleMenu}>
+                Settings
+              </a>
+            </li>
+            <li>
+              <FaBell className="text-2xl" onClick={toggleMenu} />
+            </li>
+            <li>
+              <FaUser className="text-2xl" onClick={toggleMenu} />
+            </li>
+          </ul>
+        )}
       </nav>
 
       <div className="px-8">

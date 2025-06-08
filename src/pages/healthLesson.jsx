@@ -1,15 +1,103 @@
 import { useState } from "react";
-import { FaBell, FaClock, FaFacebook, FaInstagram, FaSearch, FaTwitter, FaUser } from "react-icons/fa";
+import {
+  FaBars,
+  FaBell,
+  FaClock,
+  FaFacebook,
+  FaInstagram,
+  FaSearch,
+  FaTimes,
+  FaTwitter,
+  FaUser,
+} from "react-icons/fa";
 import { FaVolumeHigh } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 export default function HealthLessons() {
   const [progress, setProgress] = useState(30);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <>
       {" "}
-      <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
+      <nav className="flex items-center bg-[#a7e1bd25] justify-between p-4 border-b border-gray-200 relative">
+        {/* Logo */}
+        <h1 className="font-bold text-2xl">MamaSafe</h1>
+
+        {/* Desktop Links */}
+        <ul className="hidden md:flex space-x-6 font-medium">
+          <li>
+            <a
+              href="/dashboard"
+              onClick={() => {
+                navigate(-1);
+                toggleMenu;
+              }}
+            >
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="/about">Profile</a>
+          </li>
+          <li>
+            <a href="/services">Settings</a>
+          </li>
+          <li>
+            <FaBell className="text-2xl" />
+          </li>
+          <li>
+            <FaUser className="text-2xl" />
+          </li>
+        </ul>
+
+        {/* Hamburger Icon (Mobile) */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            {isOpen ? (
+              <FaTimes className="text-2xl" />
+            ) : (
+              <FaBars className="text-2xl" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <ul className="absolute top-full left-0 w-full bg-white flex flex-col items-start p-4 gap-3 border-t shadow-md z-10 md:hidden">
+            <li>
+              <a
+                href="/dashboard"
+                onClick={() => {
+                  toggleMenu;
+                  navigate(-1);
+                }}
+              >
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="/about" onClick={toggleMenu}>
+                Profile
+              </a>
+            </li>
+            <li>
+              <a href="/services" onClick={toggleMenu}>
+                Settings
+              </a>
+            </li>
+            <li>
+              <FaBell className="text-2xl" onClick={toggleMenu} />
+            </li>
+            <li>
+              <FaUser className="text-2xl" onClick={toggleMenu} />
+            </li>
+          </ul>
+        )}
+      </nav>
+      {/* <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
         <h1 className="font-bold text-2xl">MamaSafe</h1>
         <ul className="flex items-center gap-8 ">
           <li>
@@ -28,7 +116,7 @@ export default function HealthLessons() {
             <FaUser className="text-2xl" />
           </li>
         </ul>
-      </nav>
+      </nav> */}
       <div className="flex flex-col items-center justify-center mt-10">
         <h1 className="text-2xl">Health Education</h1>
         <div className="flex items-center gap-4 mt-4 bg-[#e2e2e272] rounded-md px-4 py-3 w-[30%]">

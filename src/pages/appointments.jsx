@@ -1,6 +1,17 @@
-import { Calendar, Clock, LocateFixed, LocateIcon, MapPin, MapPinOff, Pencil, Plus, Trash2 } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  LocateFixed,
+  LocateIcon,
+  MapPin,
+  MapPinOff,
+  Pencil,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import { useState } from "react";
 import {
+  FaBars,
   FaBell,
   FaCalendar,
   FaClock,
@@ -14,6 +25,7 @@ import {
   FaMapMarker,
   FaMapMarkerAlt,
   FaMapPin,
+  FaTimes,
   FaTwitter,
   FaUser,
 } from "react-icons/fa";
@@ -44,9 +56,88 @@ export default function Appointments() {
     },
   ];
   const [reminders, setReminders] = useState(remindersData);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <>
-      <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
+      <nav className="flex items-center bg-[#a7e1bd25] justify-between p-4 border-b border-gray-200 relative">
+        {/* Logo */}
+        <h1 className="font-bold text-2xl">MamaSafe</h1>
+
+        {/* Desktop Links */}
+        <ul className="hidden md:flex space-x-6 font-medium">
+          <li>
+            <a
+              href="/dashboard"
+              onClick={() => {
+                toggleMenu;
+                navigate(-1);
+              }}
+            >
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="/about">Profile</a>
+          </li>
+          <li>
+            <a href="/services">Settings</a>
+          </li>
+          <li>
+            <FaBell className="text-2xl" />
+          </li>
+          <li>
+            <FaUser className="text-2xl" />
+          </li>
+        </ul>
+
+        {/* Hamburger Icon (Mobile) */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            {isOpen ? (
+              <FaTimes className="text-2xl" />
+            ) : (
+              <FaBars className="text-2xl" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <ul className="absolute top-full left-0 w-full bg-white flex flex-col items-start p-4 gap-3 border-t shadow-md z-10 md:hidden">
+            <li>
+              <a
+                href="/dashboard"
+                onClick={() => {
+                  toggleMenu;
+                  navigate(-1);
+                }}
+              >
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="/about" onClick={toggleMenu}>
+                Profile
+              </a>
+            </li>
+            <li>
+              <a href="/services" onClick={toggleMenu}>
+                Settings
+              </a>
+            </li>
+            <li>
+              <FaBell className="text-2xl" onClick={toggleMenu} />
+            </li>
+            <li>
+              <FaUser className="text-2xl" onClick={toggleMenu} />
+            </li>
+          </ul>
+        )}
+      </nav>
+
+      {/* <nav className="flex items-center  justify-between px-8 py-4 bg-[#a7e1bd25] ">
         <h1 className="font-bold text-2xl">MamaSafe</h1>
         <ul className="flex items-center gap-8 ">
           <li>
@@ -65,7 +156,7 @@ export default function Appointments() {
             <FaUser className="text-2xl" />
           </li>
         </ul>
-      </nav>
+      </nav> */}
       <div className="px-10 ">
         <p className="flex items-center gap-2  mt-8">
           <FaHome />{" "}
