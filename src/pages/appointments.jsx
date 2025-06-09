@@ -58,66 +58,95 @@ export default function Appointments() {
     location: "",
     recurring: "",
   });
+  const [reminderToDelete, setReminderToDelete] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState({ message: "", type: "" }); // type: "success" | "error"
+
+  // Helper to show response message
+  const showResponse = (message, type = "success") => {
+    setResponse({ message, type });
+    setTimeout(() => setResponse({ message: "", type: "" }), 2500);
+  };
+
   const handleSave = async () => {
-    if (editIndex !== null) {
-      // Editing existing reminder
-      const reminder = reminders[editIndex];
-      const reminderRef = doc(db, "reminders", reminder.id);
-      await updateDoc(reminderRef, formData);
-      setReminders(
-        reminders.map((r, i) =>
-          i === editIndex ? { ...reminder, ...formData } : r
-        )
-      );
-    } else {
-      // Adding new reminder
-      const docRef = await addDoc(collection(db, "reminders"), formData);
-      setReminders([...reminders, { ...formData, id: docRef.id }]);
+    setLoading(true);
+    try {
+      if (editIndex !== null) {
+        // Editing existing reminder
+        const reminder = reminders[editIndex];
+        const reminderRef = doc(db, "reminders", reminder.id);
+        await updateDoc(reminderRef, formData);
+        setReminders(
+          reminders.map((r, i) =>
+            i === editIndex ? { ...reminder, ...formData } : r
+          )
+        );
+        showResponse("Reminder updated successfully!", "success");
+      } else {
+        // Adding new reminder
+        const docRef = await addDoc(collection(db, "reminders"), formData);
+        setReminders([...reminders, { ...formData, id: docRef.id }]);
+        showResponse("Reminder added successfully!", "success");
+      }
+      setShowModal(false);
+    } catch (err) {
+      showResponse("Failed to save reminder.", "error");
     }
-    setShowModal(false);
+    setLoading(false);
   };
 
   useEffect(() => {
     const fetchReminders = async () => {
-      const querySnapshot = await getDocs(collection(db, "reminders"));
-      const fetched = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setReminders(fetched);
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "reminders"));
+        const fetched = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setReminders(fetched);
+      } catch (err) {
+        showResponse("Failed to fetch reminders.", "error");
+      }
+      setLoading(false);
     };
 
     fetchReminders();
   }, []);
 
   const handleDeleteReminder = async (id) => {
-    await deleteDoc(doc(db, "reminders", id));
-    setReminders(reminders.filter((reminder) => reminder.id !== id));
-  };
-
-  const handleAddReminder = async () => {
-    const newReminder = {
-      title: "New Reminder",
-      time: "8:00 AM",
-      recurring: "Weekly",
-    };
-
-    const docRef = await addDoc(collection(db, "reminders"), newReminder);
-    setReminders([...reminders, { ...newReminder, id: docRef.id }]);
-  };
-
-  const handleEditReminder = async (id, updatedData) => {
-    const reminderRef = doc(db, "reminders", id);
-    await updateDoc(reminderRef, updatedData);
-    setReminders(
-      reminders.map((reminder) =>
-        reminder.id === id ? { ...reminder, ...updatedData } : reminder
-      )
-    );
+    setLoading(true);
+    try {
+      await deleteDoc(doc(db, "reminders", id));
+      setReminders(reminders.filter((reminder) => reminder.id !== id));
+      showResponse("Reminder deleted successfully!", "success");
+    } catch (err) {
+      showResponse("Failed to delete reminder.", "error");
+    }
+    setShowDeleteModal(false);
+    setReminderToDelete(null);
+    setLoading(false);
   };
 
   return (
     <>
+      {/* Loading Spinner Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#ffffffcc]">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500 border-solid"></div>
+        </div>
+      )}
+      {/* Response Message */}
+      {response.message && (
+        <div
+          className={`fixed top-6 left-1/2 z-[101] -translate-x-1/2 px-6 py-3 rounded shadow-lg text-white ${
+            response.type === "success" ? "bg-green-600" : "bg-red-500"
+          }`}
+        >
+          {response.message}
+        </div>
+      )}
       <nav className="flex items-center bg-[#a7e1bd25] justify-between p-4 border-b border-gray-200 relative">
         {/* Logo */}
         <h1 className="font-bold text-2xl">MamaSafe</h1>
@@ -268,8 +297,13 @@ export default function Appointments() {
                           setShowModal(true);
                         }}
                       />
-
-                      <Trash2 className="h-4 w-4 text-gray-500 cursor-pointer" />
+                      <Trash2
+                        className="h-4 w-4 text-gray-500 cursor-pointer"
+                        onClick={() => {
+                          setReminderToDelete(reminder);
+                          setShowDeleteModal(true);
+                        }}
+                      />
                     </div>
                   </div>
 
@@ -355,7 +389,7 @@ export default function Appointments() {
                 }
                 className="w-full border px-3 py-2 rounded"
               />
-              <input
+              {/* <input
                 type="text"
                 placeholder="Recurring (e.g., Daily)"
                 value={formData.recurring}
@@ -363,7 +397,7 @@ export default function Appointments() {
                   setFormData({ ...formData, recurring: e.target.value })
                 }
                 className="w-full border px-3 py-2 rounded"
-              />
+              /> */}
             </div>
             <div className="mt-4 flex justify-between">
               <button
@@ -377,6 +411,35 @@ export default function Appointments() {
                 onClick={handleSave}
               >
                 Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && reminderToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#5f5f5f55] bg-opacity-40">
+          <div className="bg-white p-6 rounded-lg w-[90%] max-w-md shadow-md">
+            <h2 className="text-xl font-bold mb-4">Delete Reminder</h2>
+            <p className="mb-6">
+              Are you sure you want to delete{" "}
+              <span className="font-semibold">{reminderToDelete.title}</span>?
+            </p>
+            <div className="flex justify-between">
+              <button
+                className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setReminderToDelete(null);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                onClick={() => handleDeleteReminder(reminderToDelete.id)}
+              >
+                Delete
               </button>
             </div>
           </div>
