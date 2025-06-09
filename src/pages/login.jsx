@@ -37,7 +37,10 @@ export default function Login() {
       );
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
-        const userData = querySnapshot.docs[0].data();
+        const docSnap = querySnapshot.docs[0];
+        const userData = { id: docSnap.id, ...docSnap.data() };
+        // Store user in localStorage for later use
+        localStorage.setItem("mamasafe_user", JSON.stringify(userData));
         navigate("/dashboard", { state: userData });
       } else {
         setError("User data not found.");

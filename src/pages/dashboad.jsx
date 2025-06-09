@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FaBars,
   FaBell,
@@ -26,12 +26,18 @@ export default function Dashboard() {
   const user = location.state || {};
   const [progress, setProgress] = useState(30); // Example progress percentage
   const [isOpen, setIsOpen] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
+
+  // Store user in localStorage for later use
+  useEffect(() => {
+    if (user && user.id) {
+      localStorage.setItem("mamasafe_user", JSON.stringify(user));
+    }
+  }, [user]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <div className=" ">
-    
-
       <nav className="flex items-center bg-[#a7e1bd25] justify-between p-4 border-b border-gray-200 relative">
         {/* Logo */}
         <h1 className="font-bold text-2xl">MamaSafe</h1>
@@ -217,7 +223,10 @@ export default function Dashboard() {
             <div className="flex flex-col gap-3">
               <h1 className="text-2xl font-bold">Quick Help</h1>
               <p className="">24/7 Emergency support</p>
-              <p className="flex items-center jus gap-2 text-[#fff] bg-[#4cb072de] p-3 rounded-md cursor-pointer">
+              <p
+                onClick={() => setShowHelpModal(true)}
+                className="flex items-center jus gap-2 text-[#fff] bg-[#4cb072de] p-3 rounded-md cursor-pointer hover:bg-[#3a9b5c] transition-all duration-300 ease-in-out"
+              >
                 Get Immediate Asssitance
               </p>
             </div>
@@ -261,6 +270,24 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      {showHelpModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#00000055] bg-opacity-40">
+          <div className="bg-white p-6 rounded-lg w-[90%] max-w-xs shadow-md flex flex-col items-center">
+            <h2 className="text-xl font-bold mb-4 text-center">
+              Emergency Contact
+            </h2>
+            <p className="mb-6 text-center text-lg font-semibold text-[#4cb072de]">
+              09087876565
+            </p>
+            <button
+              className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
+              onClick={() => setShowHelpModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       <footer className="flex flex-col items-center justify-center gap-4 p-6 text-gray-400 border-t border-gray-200 mt-8">
         <p>Powered by MamaSafe</p>
         <div className="flex gap-4 text-2xl">

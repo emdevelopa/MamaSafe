@@ -5,6 +5,8 @@ import {
   doc,
   getDocs,
   updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import { Calendar, Clock, MapPin, Pencil, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -24,6 +26,14 @@ import { db } from "../firebase";
 
 export default function Appointments() {
   const navigate = useNavigate();
+  // Get user from localStorage
+  const [user] = useState(() => {
+    const stored = localStorage.getItem("mamasafe_user");
+    return stored ? JSON.parse(stored) : null;
+  });
+
+  // console.log("user in appointments page", user);
+
   // const remindersData = [
   //   {
   //     title: "Take Folic Acid",
@@ -72,25 +82,33 @@ export default function Appointments() {
   const handleSave = async () => {
     setLoading(true);
     try {
+      if (!user || !user.uid) throw new Error("User not found");
       if (editIndex !== null) {
         // Editing existing reminder
         const reminder = reminders[editIndex];
         const reminderRef = doc(db, "reminders", reminder.id);
-        await updateDoc(reminderRef, formData);
+        await updateDoc(reminderRef, { ...formData, userId: user.uid });
         setReminders(
           reminders.map((r, i) =>
-            i === editIndex ? { ...reminder, ...formData } : r
+            i === editIndex ? { ...reminder, ...formData, userId: user.uid } : r
           )
         );
         showResponse("Reminder updated successfully!", "success");
       } else {
         // Adding new reminder
-        const docRef = await addDoc(collection(db, "reminders"), formData);
-        setReminders([...reminders, { ...formData, id: docRef.id }]);
+        const docRef = await addDoc(collection(db, "reminders"), {
+          ...formData,
+          userId: user.uid,
+        });
+        setReminders([
+          ...reminders,
+          { ...formData, id: docRef.id, userId: user.uid },
+        ]);
         showResponse("Reminder added successfully!", "success");
       }
       setShowModal(false);
     } catch (err) {
+      console.log(err);
       showResponse("Failed to save reminder.", "error");
     }
     setLoading(false);
@@ -100,7 +118,13 @@ export default function Appointments() {
     const fetchReminders = async () => {
       setLoading(true);
       try {
-        const querySnapshot = await getDocs(collection(db, "reminders"));
+        if (!user || !user.uid) throw new Error("User not found");
+        // Only fetch reminders for this user
+        const q = query(
+          collection(db, "reminders"),
+          where("userId", "==", user.uid)
+        );
+        const querySnapshot = await getDocs(q);
         const fetched = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -113,7 +137,7 @@ export default function Appointments() {
     };
 
     fetchReminders();
-  }, []);
+  }, [user]);
 
   const handleDeleteReminder = async (id) => {
     setLoading(true);
