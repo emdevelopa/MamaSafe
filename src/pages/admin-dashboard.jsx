@@ -23,7 +23,6 @@ export default function AdminDashboard() {
     fetchAll();
   }, []);
 
-  // Filtered lists
   const filteredUsers = users.filter(
     (u) =>
       u.fullName?.toLowerCase().includes(userSearch.toLowerCase()) ||
@@ -38,12 +37,12 @@ export default function AdminDashboard() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div className="min-h-screen bg-gray-50 p-2 md:p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-2 text-[#4cb072]">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-[#4cb072]">
           Admin Dashboard
         </h1>
-        <p className="mb-8 text-gray-500">
+        <p className="mb-8 text-gray-500 text-sm md:text-base">
           View all users and appointments at a glance.
         </p>
         {loading && (
@@ -53,27 +52,29 @@ export default function AdminDashboard() {
         )}
 
         {/* USERS */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-10">
+        <div className="bg-white rounded-xl shadow-lg p-2 md:p-6 mb-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
-            <h2 className="text-xl font-semibold text-[#4cb072]">All Users</h2>
+            <h2 className="text-lg md:text-xl font-semibold text-[#4cb072]">
+              All Users
+            </h2>
             <input
               type="text"
               placeholder="Search users..."
-              className="border rounded px-3 py-2 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-green-200"
+              className="border rounded px-3 py-2 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-green-200 text-xs md:text-base"
               value={userSearch}
               onChange={(e) => setUserSearch(e.target.value)}
             />
           </div>
           <div className="overflow-x-auto rounded-lg">
-            <table className="min-w-full border">
+            <table className="min-w-[600px] md:min-w-full border text-xs md:text-base">
               <thead className="bg-gray-100 sticky top-0 z-10">
                 <tr>
-                  <th className="px-4 py-2 border">Full Name</th>
-                  <th className="px-4 py-2 border">Email</th>
-                  <th className="px-4 py-2 border">Phone</th>
-                  <th className="px-4 py-2 border">LGA</th>
-                  <th className="px-4 py-2 border">Language</th>
-                  <th className="px-4 py-2 border">Pregnancy Status</th>
+                  <th className="px-2 md:px-4 py-2 border">Full Name</th>
+                  <th className="px-2 md:px-4 py-2 border">Email</th>
+                  <th className="px-2 md:px-4 py-2 border">Phone</th>
+                  <th className="px-2 md:px-4 py-2 border">LGA</th>
+                  <th className="px-2 md:px-4 py-2 border">Language</th>
+                  <th className="px-2 md:px-4 py-2 border">Pregnancy Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -89,12 +90,12 @@ export default function AdminDashboard() {
                       key={u.id}
                       className="hover:bg-green-50 transition-colors"
                     >
-                      <td className="px-4 py-2 border">{u.fullName}</td>
-                      <td className="px-4 py-2 border">{u.email}</td>
-                      <td className="px-4 py-2 border">{u.phone}</td>
-                      <td className="px-4 py-2 border">{u.lga}</td>
-                      <td className="px-4 py-2 border">{u.language}</td>
-                      <td className="px-4 py-2 border">
+                      <td className="px-2 md:px-4 py-2 border">{u.fullName}</td>
+                      <td className="px-2 md:px-4 py-2 border">{u.email}</td>
+                      <td className="px-2 md:px-4 py-2 border">{u.phone}</td>
+                      <td className="px-2 md:px-4 py-2 border">{u.lga}</td>
+                      <td className="px-2 md:px-4 py-2 border">{u.language}</td>
+                      <td className="px-2 md:px-4 py-2 border">
                         <span
                           className={`px-2 py-1 rounded text-xs font-semibold ${
                             u.pregnancyStatus === "Pregnant"
@@ -114,28 +115,28 @@ export default function AdminDashboard() {
         </div>
 
         {/* APPOINTMENTS */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
+        <div className="bg-white rounded-xl shadow-lg p-2 md:p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
-            <h2 className="text-xl font-semibold text-[#4cb072]">
+            <h2 className="text-lg md:text-xl font-semibold text-[#4cb072]">
               All Appointments & Reminders
             </h2>
             <input
               type="text"
               placeholder="Search appointments..."
-              className="border rounded px-3 py-2 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-green-200"
+              className="border rounded px-3 py-2 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-green-200 text-xs md:text-base"
               value={apptSearch}
               onChange={(e) => setApptSearch(e.target.value)}
             />
           </div>
           <div className="overflow-x-auto rounded-lg">
-            <table className="min-w-full border">
+            <table className="min-w-[600px] md:min-w-full border text-xs md:text-base">
               <thead className="bg-gray-100 sticky top-0 z-10">
                 <tr>
-                  <th className="px-4 py-2 border">Title</th>
-                  <th className="px-4 py-2 border">Date</th>
-                  <th className="px-4 py-2 border">Time</th>
-                  <th className="px-4 py-2 border">Location</th>
-                  <th className="px-4 py-2 border">User ID</th>
+                  <th className="px-2 md:px-4 py-2 border">Title</th>
+                  <th className="px-2 md:px-4 py-2 border">Date</th>
+                  <th className="px-2 md:px-4 py-2 border">Time</th>
+                  <th className="px-2 md:px-4 py-2 border">Location</th>
+                  <th className="px-2 md:px-4 py-2 border">User ID</th>
                 </tr>
               </thead>
               <tbody>
@@ -151,11 +152,11 @@ export default function AdminDashboard() {
                       key={a.id}
                       className="hover:bg-green-50 transition-colors"
                     >
-                      <td className="px-4 py-2 border">{a.title}</td>
-                      <td className="px-4 py-2 border">{a.date}</td>
-                      <td className="px-4 py-2 border">{a.time}</td>
-                      <td className="px-4 py-2 border">{a.location}</td>
-                      <td className="px-4 py-2 border">{a.userId}</td>
+                      <td className="px-2 md:px-4 py-2 border">{a.title}</td>
+                      <td className="px-2 md:px-4 py-2 border">{a.date}</td>
+                      <td className="px-2 md:px-4 py-2 border">{a.time}</td>
+                      <td className="px-2 md:px-4 py-2 border">{a.location}</td>
+                      <td className="px-2 md:px-4 py-2 border">{a.userId}</td>
                     </tr>
                   ))
                 )}
