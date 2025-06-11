@@ -9,6 +9,7 @@ import Dashboard from "./pages/dashboad";
 import Appointments from "./pages/appointments";
 import HealthLessons from "./pages/healthLesson";
 import CheckSymptoms from "./pages/checksymptoms";
+import AdminDashboard from "./pages/admin-dashboard";
 // import "./App.css";
  
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/appointments" element={<Appointments />} />
         <Route path="/HealthLessons" element={<HealthLessons />} />
         <Route path="/checkSymptoms" element={<CheckSymptoms />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/settings" element={<Settings />} /> */}
       </Routes>
