@@ -18,6 +18,52 @@ export default function HealthLessons() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
+  // Example lessons array
+  const lessons = [
+    {
+      id: 1,
+      category: "NUTRITION",
+      title: "Essential Nutrients During Pregnancy",
+      duration: "15 min read",
+      progress,
+    },
+    {
+      id: 2,
+      category: "NUTRITION",
+      title: "Essential Nutrients During Pregnancy",
+      duration: "15 min read",
+      progress,
+    },
+    {
+      id: 3,
+      category: "NUTRITION",
+      title: "Essential Nutrients During Pregnancy",
+      duration: "15 min read",
+      progress,
+    },
+    {
+      id: 4,
+      category: "NUTRITION",
+      title: "Essential Nutrients During Pregnancy",
+      duration: "15 min read",
+      progress,
+    },
+    {
+      id: 5,
+      category: "NUTRITION",
+      title: "Essential Nutrients During Pregnancy",
+      duration: "15 min read",
+      progress,
+    },
+    {
+      id: 6,
+      category: "NUTRITION",
+      title: "Essential Nutrients During Pregnancy",
+      duration: "15 min read",
+      progress,
+    },
+  ];
+
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <>
@@ -128,138 +174,34 @@ export default function HealthLessons() {
           <FaSearch className="text-[#4cb07292]" />
         </div>
         <div className="my-10  bg-[#86dea846] px-6 md:px-12 w-full py-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
-          <div className="p-6 bg-white shadow-md rounded-md w-full max-w-md ">
-            <p className="text-[#4cb072de] text-sm ">NUTRITION</p>
-            <p className="text-lg mt-4">Essential Nutrients During Pregnancy</p>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mt-4">
-              <FaClock />
-              <span>15 min read</span>
-            </div>
+          {lessons.map((lesson) => (
+            <div
+              key={lesson.id}
+              className="p-6 bg-white shadow-md rounded-md w-full max-w-md cursor-pointer hover:shadow-lg transition"
+              onClick={() => navigate(`/health-lessons/${lesson.id}`)}
+            >
+              <p className="text-[#4cb072de] text-sm ">{lesson.category}</p>
+              <p className="text-lg mt-4">{lesson.title}</p>
+              <div className="flex items-center gap-1 text-gray-500 text-sm mt-4">
+                <FaClock />
+                <span>{lesson.duration}</span>
+              </div>
 
-            {/* Progress Loader */}
-            <div className="mt-4">
-              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#4cb072] rounded-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mt-1 text-sm text-gray-600">
-                <p className="text-[#4cb072]">In Progress - {progress}%</p>
-                <FaVolumeHigh className="text-[#4cb072]" />
-              </div>
-            </div>
-          </div>{" "}
-          <div className="p-6 bg-white shadow-md rounded-md w-full max-w-md ">
-            <p className="text-[#4cb072de] text-sm ">NUTRITION</p>
-            <p className="text-lg mt-4">Essential Nutrients During Pregnancy</p>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mt-4">
-              <FaClock />
-              <span>15 min read</span>
-            </div>
-
-            {/* Progress Loader */}
-            <div className="mt-4">
-              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#4cb072] rounded-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mt-1 text-sm text-gray-600">
-                <p className="text-[#4cb072]">In Progress - {progress}%</p>
-                <FaVolumeHigh className="text-[#4cb072]" />
+              {/* Progress Loader */}
+              <div className="mt-4">
+                <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-[#4cb072] rounded-full transition-all duration-500"
+                    style={{ width: `${lesson.progress}%` }}
+                  ></div>
+                </div>
+                <div className="flex justify-between items-center mt-1 text-sm text-gray-600">
+                  <p className="text-[#4cb072]">In Progress - {lesson.progress}%</p>
+                  <FaVolumeHigh className="text-[#4cb072]" />
+                </div>
               </div>
             </div>
-          </div>{" "}
-          <div className="p-6 bg-white shadow-md rounded-md w-full max-w-md ">
-            <p className="text-[#4cb072de] text-sm ">NUTRITION</p>
-            <p className="text-lg mt-4">Essential Nutrients During Pregnancy</p>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mt-4">
-              <FaClock />
-              <span>15 min read</span>
-            </div>
-
-            {/* Progress Loader */}
-            <div className="mt-4">
-              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#4cb072] rounded-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mt-1 text-sm text-gray-600">
-                <p className="text-[#4cb072]">In Progress - {progress}%</p>
-                <FaVolumeHigh className="text-[#4cb072]" />
-              </div>
-            </div>
-          </div>{" "}
-          <div className="p-6 bg-white shadow-md rounded-md w-full max-w-md ">
-            <p className="text-[#4cb072de] text-sm ">NUTRITION</p>
-            <p className="text-lg mt-4">Essential Nutrients During Pregnancy</p>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mt-4">
-              <FaClock />
-              <span>15 min read</span>
-            </div>
-
-            {/* Progress Loader */}
-            <div className="mt-4">
-              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#4cb072] rounded-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mt-1 text-sm text-gray-600">
-                <p className="text-[#4cb072]">In Progress - {progress}%</p>
-                <FaVolumeHigh className="text-[#4cb072]" />
-              </div>
-            </div>
-          </div>{" "}
-          <div className="p-6 bg-white shadow-md rounded-md w-full max-w-md ">
-            <p className="text-[#4cb072de] text-sm ">NUTRITION</p>
-            <p className="text-lg mt-4">Essential Nutrients During Pregnancy</p>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mt-4">
-              <FaClock />
-              <span>15 min read</span>
-            </div>
-
-            {/* Progress Loader */}
-            <div className="mt-4">
-              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#4cb072] rounded-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mt-1 text-sm text-gray-600">
-                <p className="text-[#4cb072]">In Progress - {progress}%</p>
-                <FaVolumeHigh className="text-[#4cb072]" />
-              </div>
-            </div>
-          </div>{" "}
-          <div className="p-6 bg-white shadow-md rounded-md w-full max-w-md ">
-            <p className="text-[#4cb072de] text-sm ">NUTRITION</p>
-            <p className="text-lg mt-4">Essential Nutrients During Pregnancy</p>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mt-4">
-              <FaClock />
-              <span>15 min read</span>
-            </div>
-
-            {/* Progress Loader */}
-            <div className="mt-4">
-              <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#4cb072] rounded-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mt-1 text-sm text-gray-600">
-                <p className="text-[#4cb072]">In Progress - {progress}%</p>
-                <FaVolumeHigh className="text-[#4cb072]" />
-              </div>
-            </div>
-          </div>{" "}
+          ))}
         </div>
         {/* <button className="  px-6 py-3 bg-[#4cb072de] text-white rounded-md">
           Load More
@@ -277,3 +219,4 @@ export default function HealthLessons() {
     </>
   );
 }
+    

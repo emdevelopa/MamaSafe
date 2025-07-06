@@ -136,7 +136,7 @@ export default function Dashboard() {
           <div
             className="shadow-md flex gap-4 rounded-md px-4 py-6 cursor-pointer 
              hover:scale-[1.02] transition-all duration-300 ease-in-out"
-            onClick={() => navigate("/HealthLessons")}
+            onClick={() => navigate("/health-lessons")}
           >
             <div className="bg-[#a7f5c577] p-2 rounded-md h-fit">
               <FaLock className="text-[#4cb072de]" />
