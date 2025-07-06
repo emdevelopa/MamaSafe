@@ -53,6 +53,7 @@ export default function SignUp() {
         email: form.email,
         fullName: form.fullName,
         phone: form.phone,
+        pwd: form.password,
         lga: form.lga,
         age: form.age,
         pregnancyStatus: form.pregnancyStatus,
